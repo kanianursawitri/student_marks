@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS records;
+
+DROP INDEX IF EXISTS idx_marks;

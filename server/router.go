@@ -11,15 +11,15 @@ import (
 func (s *Server) RegisterRoute() {
 	mainRoute := s.app.Group("/api/v1")
 
-	registerMarkRoute(mainRoute, s.db)
+	registerRecordRoute(mainRoute, s.db)
 }
 
-func registerMarkRoute(r fiber.Router, db *sqlx.DB) {
-	ctrl := controller.NewMarkController(svc.NewMarkSvc(repo.NewMarkRepo(db)))
-	markRoute := r.Group("/marks")
+func registerRecordRoute(r fiber.Router, db *sqlx.DB) {
+	ctrl := controller.NewRecordController(svc.NewRecordSvc(repo.NewRecordRepo(db)))
+	markRoute := r.Group("/records")
 
-	newRoute(markRoute, "GET", "", ctrl.GetAllMarks)
-
+	newRoute(markRoute, "GET", "", ctrl.GetAllRecords)
+	newRoute(markRoute, "POST", "", ctrl.AddRecord)
 }
 
 func newRoute(router fiber.Router, method, path string, handler fiber.Handler) {

@@ -1,25 +1,25 @@
 package customErr
 
 type CustomError struct {
-	Message    string `json:"message"`
-	StatusCode int    `json:"status"`
+	Msg  string `json:"msg"`
+	Code int    `json:"code"`
 }
 
 func (e CustomError) Error() string {
-	return e.Message
+	return e.Msg
 }
 func (e CustomError) Status() int {
-	return e.StatusCode
+	return e.Code
 }
 
 func NewBadRequestError(message string) CustomError {
-	return CustomError{Message: message, StatusCode: 400}
+	return CustomError{Msg: message, Code: 400}
 }
 
 func NewNotFoundError(message string) CustomError {
-	return CustomError{Message: message, StatusCode: 404}
+	return CustomError{Msg: message, Code: 404}
 }
 
 func NewInternalServerError(message string) CustomError {
-	return CustomError{Message: message, StatusCode: 500}
+	return CustomError{Msg: message, Code: 500}
 }

@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS records(
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    marks INTEGER[] NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_marks ON records(marks)
