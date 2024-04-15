@@ -17,8 +17,26 @@ func NewRecordController(s svc.RecordSvc) *RecordController {
 	}
 }
 
+/*
+the instructions say that the request payload will be in JSON so I make the API using method POST,
+room for improvement: I think it will be better if we use GET instead of POST and parse the request parameters from the URL query instead of JSON body
+*/
 func (c *RecordController) GetAllRecords(ctx *fiber.Ctx) error {
-	return nil
+	var request entity.GetAllRecordsRequest
+	if err := ctx.BodyParser(&request); err != nil {
+		return customErr.NewBadRequestError("invalid request body")
+	}
+
+	records, err := c.svc.GetAllRecordsWithFilter(request)
+	if err != nil {
+		return err
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"records": records,
+		"code":    0,
+		"msg":     "Records fetched successfully",
+	})
 }
 
 /*

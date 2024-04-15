@@ -18,8 +18,8 @@ func registerRecordRoute(r fiber.Router, db *sqlx.DB) {
 	ctrl := controller.NewRecordController(svc.NewRecordSvc(repo.NewRecordRepo(db)))
 	markRoute := r.Group("/records")
 
-	newRoute(markRoute, "GET", "", ctrl.GetAllRecords)
-	newRoute(markRoute, "POST", "", ctrl.AddRecord)
+	newRoute(markRoute, "POST", "/find", ctrl.GetAllRecords)
+	newRoute(markRoute, "POST", "/add", ctrl.AddRecord)
 }
 
 func newRoute(router fiber.Router, method, path string, handler fiber.Handler) {
