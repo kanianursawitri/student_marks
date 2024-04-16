@@ -35,7 +35,7 @@ func (c *RecordController) GetAllRecords(ctx *fiber.Ctx) error {
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"records": records,
 		"code":    0,
-		"msg":     "Records fetched successfully",
+		"msg":     "Success",
 	})
 }
 
